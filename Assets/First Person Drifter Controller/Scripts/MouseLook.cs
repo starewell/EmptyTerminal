@@ -116,7 +116,7 @@ public class MouseLook : MonoBehaviour
 
 
 		//Interaction input
-		if(Input.GetButtonDown("interact")) 
+		if(Input.GetMouseButtonDown(0)) 
 		{
 			//Shoot out a ray
 			Ray ray = cam.ScreenPointToRay(Input.mousePosition);

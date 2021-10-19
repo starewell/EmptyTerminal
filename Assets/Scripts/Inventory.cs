@@ -18,7 +18,6 @@ public class Inventory : MonoBehaviour
 		instance = this;
 	}
 
-
     public List<Item> items = new List<Item>();
 
     public void Add(Item item) {

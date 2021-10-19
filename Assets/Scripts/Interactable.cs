@@ -7,7 +7,7 @@ using UnityEngine.AI;
 	to be used as a base class.
 */
 
-//[RequireComponent(typeof(ColorOnHover))]
+[RequireComponent(typeof(ColorOnHover))]
 public class Interactable : MonoBehaviour {
 
 	public float radius = 2.5f;
@@ -21,12 +21,10 @@ public class Interactable : MonoBehaviour {
 
 	void Update ()
 	{
-		Debug.Log(onClick);
 		if (onClick){
 			float distance = Vector3.Distance(player.position, transform.position);
 			if (distance <= radius) {
 				if (!locked) {
-					Debug.Log("Interact");
 					Interact();
 					hasInteracted = true;
 				} else {
