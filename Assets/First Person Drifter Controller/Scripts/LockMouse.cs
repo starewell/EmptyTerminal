@@ -5,28 +5,24 @@ using System.Collections;
 
 public class LockMouse : MonoBehaviour
 {	
-	void Start()
-	{
-		LockCursor(true);
-	}
+    public bool state = false;
 
     void Update()
     {
     	// lock when mouse is clicked
     	if( Input.GetMouseButtonDown(0) && Time.timeScale > 0.0f )
     	{
-    		LockCursor(true);
+    		Cursor.lockState = CursorLockMode.Locked;
+
+            state = true;
     	}
     
     	// unlock when escape is hit
         if  ( Input.GetKeyDown(KeyCode.Escape) )
         {
-        	LockCursor(!Screen.lockCursor);
+        	Cursor.lockState = CursorLockMode.None;
+            state = false;
         }
     }
-    
-    public void LockCursor(bool lockCursor)
-    {
-    	Screen.lockCursor = lockCursor;
-    }
+
 }
