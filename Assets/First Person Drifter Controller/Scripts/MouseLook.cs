@@ -38,6 +38,14 @@ public class MouseLook : MonoBehaviour
 	public float framesOfSmoothing = 5;
  
 	Quaternion originalRotation;
+
+	public delegate void OnInteractableClicked(Interactable clicked);
+
+	//Custom variables for interaction functions
+	public Camera cam;
+	public LayerMask interactionMask;
+
+
 	
 	void Start ()
 	{			
@@ -47,6 +55,9 @@ public class MouseLook : MonoBehaviour
 		}
 		
 		originalRotation = transform.localRotation;
+
+		//initialize camera;
+		cam = Camera.main;
 	}
  
 	void Update ()
@@ -74,6 +85,7 @@ public class MouseLook : MonoBehaviour
 			transform.localRotation = originalRotation * xQuaternion;			
 		}
 		else
+
 		{			
 			rotAverageY = 0f;
  
@@ -101,6 +113,26 @@ public class MouseLook : MonoBehaviour
 			Quaternion yQuaternion = Quaternion.AngleAxis (rotAverageY, Vector3.left);
 			transform.localRotation = originalRotation * yQuaternion;
 		}
+
+
+		//Interaction input
+		if(Input.GetMouseButtonDown(0)) 
+		{
+			//Shoot out a ray
+			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+
+			// If we hit
+			if (Physics.Raycast(ray, out hit, 100f, interactionMask))
+			{
+				//
+				Interact(hit.collider.GetComponent<Interactable>());
+			}
+		}
+	}
+
+	public void Interact(Interactable clickedInteractable) {
+		clickedInteractable.OnClicked(transform);
 	}
 	
 	public void SetSensitivity(float s)
