@@ -36,5 +36,12 @@ public class InventorySlot : MonoBehaviour
 
 	public void OnItemButton() {
 		Inventory.instance.Remove(item);
+		if (item != null) {
+			item.Equip();
+		}
+	}
+
+	public virtual void Equip() {
+		Debug.Log("Using " + name);
 	}
 }

@@ -10,11 +10,19 @@ public class InventoryUI : MonoBehaviour
 
     InventorySlot[] slots;
 
+    public GameObject inventoryUI;
+
     void Start() {
     	inventory = Inventory.instance;
     	inventory.onItemChangedCallback += UpdateUI;
 
     	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+    }
+
+    void Update() {
+    	if(Input.GetButtonDown("Inventory")) {
+    		
+    	}
     }
 
     void UpdateUI() {
