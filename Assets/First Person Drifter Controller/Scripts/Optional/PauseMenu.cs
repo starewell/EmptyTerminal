@@ -93,7 +93,7 @@ public class PauseMenu : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if( Input.GetKeyDown(KeyCode.Escape) )
+		if( Input.GetKeyDown(KeyCode.Escape))
 		{
 			PauseGame();
 		}
@@ -101,36 +101,30 @@ public class PauseMenu : MonoBehaviour
 	
 	void OnGUI()
 	{
-		if( paused )
-		{
+		if( paused ) {
 			
-			if( !mouseSettings && !quitDialog)
-			{
+			if( !mouseSettings && !quitDialog) {
 				DrawPauseMenuBG();
 				
 				// Resume game button
-				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight, buttonWidth, buttonHeight), "Resume", pauseMenuStyle))
-				{
+				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight, buttonWidth, buttonHeight), "Resume", pauseMenuStyle)) {
 					PauseGame();
 				}
 				
 				// Reset level button
-				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight*2, buttonWidth, buttonHeight), "Reset Level", pauseMenuStyle))
-				{
+				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight*2, buttonWidth, buttonHeight), "Reset Level", pauseMenuStyle)) {
 					print("Reset Level");
 					PauseGame();
 					Application.LoadLevel(Application.loadedLevel);
 				}
 				
 				// options button
-				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight*3, buttonWidth, buttonHeight), "Options", pauseMenuStyle))
-				{
+				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight*3, buttonWidth, buttonHeight), "Options", pauseMenuStyle)) {
 					mouseSettings = true;
 				}
 				
 				// Quit button
-				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight*4, buttonWidth, buttonHeight), "Quit Game", pauseMenuStyle))
-				{
+				if(GUI.Button(new Rect(Screen.width/2 - buttonWidth/2, buttonHeight*4, buttonWidth, buttonHeight), "Quit Game", pauseMenuStyle)) {
 					quitDialog = true;
 				}
 			}

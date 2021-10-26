@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1eaa7ba40d68340b034781852bce3a, type: 3}
+  m_Name: BoardingPass
+  m_EditorClassIdentifier: 
+  name: Boarding Pass
+  icon: {fileID: 21300000, guid: 1129c8d67a5f45f46a1dab3281c5c25b, type: 3}
+  showInInventory: 1
+  go: {fileID: 7966093269929929204, guid: 0539bbc871287ea4da04c5f56b310ca2, type: 3}
