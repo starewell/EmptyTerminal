@@ -16,6 +16,7 @@ public class InventoryUI : MonoBehaviour
     InventorySlot[] slots;
     public LockMouse mouseLock;
     public GameObject inventoryUI;
+    bool updateStart = false;
 
     void Start() {
     	inventory = Inventory.instance;
@@ -23,7 +24,7 @@ public class InventoryUI : MonoBehaviour
 
     	slots = itemsParent.GetComponentsInChildren<InventorySlot>();
     	inventoryUI.SetActive(false);
-    	Update();
+    	UpdateUI();
     }
 
     void Update() {
@@ -35,6 +36,7 @@ public class InventoryUI : MonoBehaviour
     public void ToggleUI() {
     	inventoryUI.SetActive(!inventoryUI.activeSelf);
     	mouseLock.ToggleLock();
+    	UpdateUI();
     	Time.timeScale = 1.0f - Time.timeScale;
     }
 
