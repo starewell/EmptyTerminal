@@ -5,30 +5,47 @@ using System.Linq;
 public class ColorOnHover : MonoBehaviour {
 
 	public Color color;
+
+	public Material glowMat;
+	float glowAlpha;
 	public Renderer meshRenderer;
 
-	Color[] originalColours;
+	//Color[] originalColours;
+	Material originalMat;
+	bool active;
 
 	void Start() {
 		if (meshRenderer == null) {
 			meshRenderer = GetComponent<MeshRenderer> ();
 		}
-		originalColours = meshRenderer.materials.Select (x => x.color).ToArray ();
+		//originalColours = meshRenderer.materials.Select (x => x.color).ToArray ();
+		originalMat = meshRenderer.material;
 	}
 
-	void OnMouseEnter ()
-	{
-		foreach (Material mat in meshRenderer.materials) {
-			mat.color *= color;
+	/*void Update() {
+		if (active) {
+			glowAlpha = (Mathf.Sin(Time.time * 20) * 0.5f) + 0.5f;
+			meshRenderer.material.SetFloat("Alpha", glowAlpha);
+			//Debug.Log(glowAlpha);
 		}
+	}*/
 
+	public void Activate()
+	{
+		//foreach (Material mat in meshRenderer.materials) {
+		//	mat.color += color;
+		//}
+		meshRenderer.material = glowMat;
+		active = true;
 	}
 
-	void OnMouseExit()
+	public void Deactivate()
 	{
-		for (int i = 0; i < originalColours.Length; i++) {
-			meshRenderer.materials [i].color = originalColours [i];
-		}
+		//for (int i = 0; i < originalColours.Length; i++) {
+		//	meshRenderer.materials [i].color = originalColours [i];
+		//}
+		meshRenderer.material = originalMat;
+		active = false;
 	}
 
 }

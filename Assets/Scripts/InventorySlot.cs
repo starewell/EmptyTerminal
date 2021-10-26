@@ -7,8 +7,11 @@ public class InventorySlot : MonoBehaviour
 {
 
 	public Image icon;
-	public Image empty;
 	public Button button;
+	public Text itemName;
+
+	public GameObject[] full;
+	public GameObject empty;
 
 	Item item;
 
@@ -17,31 +20,26 @@ public class InventorySlot : MonoBehaviour
 	}
 
 	public void AddItem(Item newItem) {
-		item = newItem;
+		foreach(GameObject go in full) go.SetActive(true);
+		empty.SetActive(false);
 
+		item = newItem;
 		icon.sprite = item.icon;
-		icon.enabled = true;
-		button.interactable = true;
-		empty.enabled = false;
+		itemName.text = newItem.name;		
 	}
 
 	public void ClearSlot() {
-		item = null;
+		foreach(GameObject go in full) go.SetActive(false);
+		empty.SetActive(true);
 
+		item = null;
 		icon.sprite = null;
-		icon.enabled = false;
-		button.interactable = true;
-		empty.enabled = true;
 	}
 
 	public void OnItemButton() {
-		Inventory.instance.Remove(item);
 		if (item != null) {
 			item.Equip();
+			InventoryUI.instance.ToggleUI();
 		}
-	}
-
-	public virtual void Equip() {
-		Debug.Log("Using " + name);
 	}
 }

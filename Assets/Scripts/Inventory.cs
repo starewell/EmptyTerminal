@@ -4,12 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-
-	public delegate void OnItemChanged();
-	public OnItemChanged onItemChangedCallback;
-
 	public static Inventory instance;
-
 	void Awake() {
 		if (instance != null) {
 			Debug.LogWarning("More than one instance of Invetory found!");
@@ -18,14 +13,23 @@ public class Inventory : MonoBehaviour
 		instance = this;
 	}
 
+	public delegate void OnItemChanged();
+	public OnItemChanged onItemChangedCallback;
+
+	public List<Item> startingItems = new List<Item>();
     public List<Item> items = new List<Item>();
+
+    void Start() {
+    	foreach (Item item in startingItems) items.Add(item);
+    	if (onItemChangedCallback != null) 
+    		onItemChangedCallback.Invoke();
+    }
 
     public void Add(Item item) {
     	items.Add(item);
 
     	if (onItemChangedCallback != null) 
     		onItemChangedCallback.Invoke();
-    	
     }
 
     public void Remove(Item item) {
