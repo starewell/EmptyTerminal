@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+	
+
+	public delegate void OnItemChanged();
+	public OnItemChanged onItemChangedCallback;
+
+	public List<Item> startingItems = new List<Item>();
+    public List<Item> items = new List<Item>();
+
 	public static Inventory instance;
 	void Awake() {
 		if (instance != null) {
@@ -13,17 +21,9 @@ public class Inventory : MonoBehaviour
 		instance = this;
 	}
 
-	public delegate void OnItemChanged();
-	public OnItemChanged onItemChangedCallback;
-
-	public List<Item> startingItems = new List<Item>();
-    public List<Item> items = new List<Item>();
-
-    void Start() {
-    	foreach (Item item in startingItems) items.Add(item);
-    	if (onItemChangedCallback != null) 
-    		onItemChangedCallback.Invoke();
-    }
+	public void Start() {
+		foreach (Item item in startingItems) Add(item);
+	}
 
     public void Add(Item item) {
     	items.Add(item);

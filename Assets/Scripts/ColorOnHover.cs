@@ -19,7 +19,10 @@ public class ColorOnHover : MonoBehaviour {
 			meshRenderer = GetComponent<MeshRenderer> ();
 		}
 		//originalColours = meshRenderer.materials.Select (x => x.color).ToArray ();
-		originalMat = meshRenderer.material;
+		//foreach(Renderer subMesh in meshRenderer) {
+			originalMat = meshRenderer.material;
+		//}
+		
 	}
 
 	/*void Update() {

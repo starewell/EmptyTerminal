@@ -30,14 +30,17 @@ public class ProgressionManager : MonoBehaviour {
 		}
 
 		if (progress == Progression.towardsGateTriggers) {
-			if(progressionIndex == 0) towards.RunningLate();
-			if(progressionIndex == 1) towards.FinalCall();
-			if(progressionIndex == 2) towards.ApproachingGate();
-			if(progressionIndex == 3) towards.PlacedTickets();
+			if(progressionIndex == 0) towards.FinalCall();
+			if(progressionIndex == 1) towards.ApproachingGate();
+			if(progressionIndex == 2) towards.PlacedTickets();
 		}
 
 		if (progress == Progression.leavingTerminal) {
 			if(progressionIndex ==0) leaving.ForgotTeddy();
+			if(progressionIndex ==1) leaving.PickUpTeddy();
+			if(progressionIndex ==2) leaving.LeaveWithTeddy();
+			if(progressionIndex ==3) leaving.PlaceTeddy();
+			if(progressionIndex ==4) leaving.GetOut();
 		}
 	}
 }
@@ -77,10 +80,10 @@ public class ConveyorProgress {
 		audioSources[1].Play();
 		audioSources[0].clip = announcements[2];
 		audioSources[0].Play();
-		progressionGates[1].SetActive(true);
 		movementTriggers[1].SetActive(false);
 	}
 	public void PickedUpSuitcase() {
+		progressionGates[0].SetActive(true);
 		progressionGates[1].SetActive(false);
 	}
 	public void ExitsTSA() {
@@ -100,20 +103,18 @@ public class TowardsGateProgress {
 	public GameObject interactionZone;
 	public GameObject teddy;
 
-	public void RunningLate() {
-		audioSources[0].clip = announcements[0];
-		audioSources[0].Play();
-		movementTriggers[0].SetActive(false);
-	}
-
 	public void FinalCall() {
-		audioSources[0].clip = announcements[0];
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[1];
 		audioSources[0].Play();
 		movementTriggers[0].SetActive(false);
 	}
 
 	public void ApproachingGate() {
-		audioSources[0].clip = announcements[0];
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[2];
 		audioSources[0].Play();
 		movementTriggers[1].SetActive(false);
 	}
@@ -121,8 +122,11 @@ public class TowardsGateProgress {
 	public void PlacedTickets() {
 		teddy.SetActive(true);
 		interactionZone.SetActive(false);
-		audioSources[0].clip = announcements[0];
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[3];
 		audioSources[0].Play();
+		movementTriggers[2].SetActive(true);
 	}
 }
 
@@ -131,12 +135,47 @@ public class LeavingTerminalProgress {
 	public AudioClip[] announcements;
 	public AudioSource[] audioSources;
 
+	public GameObject[] progressionGates;
 	public GameObject[] movementTriggers;
 
 	public void ForgotTeddy() {
-		audioSources[0].clip = announcements[0];
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[1];
 		audioSources[0].Play();
 		movementTriggers[0].SetActive(false);
+	}
+
+	public void PickUpTeddy() {
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[2];
+		audioSources[0].Play();
+		movementTriggers[0].SetActive(false);
+		movementTriggers[1].SetActive(true);
+	}
+
+	public void LeaveWithTeddy() {
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[3];
+		audioSources[0].Play();
+		movementTriggers[1].SetActive(false);
+	}
+
+	public void PlaceTeddy() {
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[5];
+		audioSources[0].Play();
+		progressionGates[0].SetActive(false);
+	}
+
+	public void GetOut() {
+		audioSources[1].clip = announcements[0];
+		audioSources[1].Play();
+		audioSources[0].clip = announcements[6];
+		audioSources[0].Play();
 	}
 }
 
